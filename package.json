@@ -1,0 +1,76 @@
+{
+  "name": "ikhokha-serverless",
+  "version": "1.0.0",
+  "description": "Serverless webpack example using Typescript",
+  "main": "handler.ts",
+  "types": "./typings/typings.d.ts",
+  "scripts": {
+    "build": "NODE_ENV=production npx serverless package",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=development npx serverless offline --host localhost --port 8000",
+    "deploy:dev": "NODE_ENV=development npx serverless deploy",
+    "deploy:prod": "NODE_ENV=production npx serverless deploy",
+    "cli:generate-schema": "npx ts-node ./cli-tools/save-remote-schema.ts --path ./src/generated/schema.graphql --url https://ikhokha.myshopify.com/api/graphql --token d2696157b6d517907338605169b708d3",
+    "lint:suggest": "npx eslint  **/*.ts",
+    "lint:fix": "npx eslint  **/*.ts --fix"
+  },
+  "dependencies": {
+    "apollo-link-context": "^1.0.17",
+    "apollo-link-http": "^1.5.14",
+    "apollo-server-lambda": "^2.4.8",
+    "graphql": "^14.2.1",
+    "graphql-import": "^0.7.1",
+    "graphql-playground-middleware-lambda": "^1.7.13",
+    "minimist": "^1.2.0",
+    "node-fetch": "^2.3.0",
+    "source-map-support": "^0.5.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/aws-lambda": "^8.10.17",
+    "@types/circular-dependency-plugin": "^5.0.0",
+    "@types/graphql": "^14.2.0",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^10.12.18",
+    "@types/node-fetch": "^2.3.2",
+    "@types/webpack-node-externals": "^1.6.3",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "apollo-server-testing": "^2.4.8",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "circular-dependency-plugin": "^5.0.2",
+    "eslint": "^5.16.0",
+    "eslint-loader": "^2.1.2",
+    "imports-loader": "^0.8.0",
+    "jest": "^24.7.1",
+    "raw-loader": "^2.0.0",
+    "serverless": "^1.40.0",
+    "serverless-dotenv-plugin": "^2.0.1",
+    "serverless-offline": "^4.9.4",
+    "serverless-webpack": "^5.2.0",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "./.webpack",
+      "./.serverless"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ],
+    "moduleNameMapper": {}
+  },
+  "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
+  "license": "MIT"
+}
