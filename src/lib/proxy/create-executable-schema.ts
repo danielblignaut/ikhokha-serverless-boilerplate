@@ -5,10 +5,11 @@ import { GraphQLSchema } from 'graphql'
 
 export default (
 	schema: string,
-	shopifyUrl: string,
-	shopifyToken: string
+	url: string,
+	token: string,
+	tokenKey: string
 ): GraphQLSchema => {
-	const link: ApolloLink = createLink(shopifyUrl, shopifyToken)
+	const link: ApolloLink = createLink(url, token, tokenKey)
 
 	const executableSchema = makeRemoteExecutableSchema({
 		schema,
@@ -16,7 +17,7 @@ export default (
 	})
 
 	if (typeof executableSchema === 'undefined') {
-		throw new Error(`Could not get the Shopify schema at url: ${shopifyUrl}`)
+		throw new Error(`Could not get the Shopify schema at url: ${url}`)
 	}
 
 	return executableSchema

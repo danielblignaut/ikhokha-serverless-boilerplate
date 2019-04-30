@@ -1,5 +1,2 @@
 .serverless/**/*
 .webpack/**/*
-webpack.config.js
-
-# add https://javascriptplayground.com/typescript-eslint/ to VSCODE

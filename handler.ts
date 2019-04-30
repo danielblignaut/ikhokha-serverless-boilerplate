@@ -1,9 +1,12 @@
-import { startServer } from './src/helpers'
+import {createServer} from './src/lib/server'
+import { APIGatewayProxyEvent, Callback, APIGatewayProxyResult, Context } from 'aws-lambda'
+import {CustomContext} from './typings/types'
 
-// TODO: no typing for the below
-export const appFunction = startServer().createHandler({
-	cors: {
-		origin: true,
-		credentials: true
-	}
-})
+
+const context: CustomContext = {
+
+}
+
+
+
+export const appFunction: (event: APIGatewayProxyEvent, context: Context, callback: Callback<APIGatewayProxyResult>)=> void = createServer(context)

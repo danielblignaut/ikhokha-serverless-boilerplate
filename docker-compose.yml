@@ -1,0 +1,11 @@
+version: "3"
+services:
+  dev:
+    image: lambci/lambda:build-nodejs8.10
+    container_name: ikhokha-shopify-proxy-dev
+    volumes:
+      - .:/usr/src
+    working_dir: /usr/src
+    command: npm run dev
+    ports:
+      - 8000:8000

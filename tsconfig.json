@@ -11,11 +11,6 @@
     "strict": true, 
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "src/**/*",
-    "typings/**/*",
-    "cli-tools/**/*"
-  ],
   "exclude": [
     "node_modules"
   ]

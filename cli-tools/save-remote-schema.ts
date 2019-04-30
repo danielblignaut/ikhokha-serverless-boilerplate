@@ -1,4 +1,4 @@
-import createLink from '../src/create-link'
+import createLink from '../src/lib/proxy/create-link'
 import { ApolloLink } from 'apollo-link'
 import * as fs from 'fs'
 import { promisify } from 'util'
@@ -24,17 +24,14 @@ import {
 	transformSchema,
 	FilterRootFields} from 'graphql-tools'
 import { RootFilter } from 'graphql-tools/dist/transforms/FilterRootFields'
+import { OperationsToKeep } from '../typings/types'
 
 const removeRootQueriesAndMutations: RootFilter = (
 	operation: 'Query' | 'Mutation' | 'Subscription',
 	fieldName: string): boolean => {
-	interface IoperationsToKeep {
-		Query: string[]
-		Mutation: string[]
-		[key: string]: string[]
-	}
+	
 
-	const operationsToKeep: IoperationsToKeep = {
+	const operationsToKeep: OperationsToKeep = {
 		Query: ['collections', 'productTypes', 'products'],
 		Mutation: [
 			'checkoutCreate',
@@ -67,6 +64,10 @@ const filterSchema = (schema: GraphQLSchema): GraphQLSchema => {
 	])
 }
 
+/*
+	CLI TOOL
+*/
+
 const run = async (): Promise<void> => {
 	const argv: minimist.ParsedArgs = minimist(process.argv)
 
@@ -76,8 +77,10 @@ const run = async (): Promise<void> => {
 		throw new Error('--token flag must be set')
 	if (typeof argv['path'] === 'undefined')
 		throw new Error('--path flag must be set')
+	if (typeof argv['token-key'] === 'undefined')
+		throw new Error('--token-key flag must be set')
 
-	const link: ApolloLink = createLink(argv['url'], argv['token'])
+	const link: ApolloLink = createLink(argv['url'], argv['token'], argv['token-key'] )
 	const writeFile = promisify(fs.writeFile)
 
 	let schema: GraphQLSchema = await fetchSchema(link)

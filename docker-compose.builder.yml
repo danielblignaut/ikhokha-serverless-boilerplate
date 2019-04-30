@@ -1,0 +1,11 @@
+version: '2'
+services:
+  base:
+    image: lambci/lambda:build-nodejs8.10
+    volumes:
+      - .:/usr/src
+    working_dir: /usr/src
+  install:
+    extends:
+      service: base
+    command: npm install
