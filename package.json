@@ -10,6 +10,7 @@
     "dev": "NODE_ENV=development npx serverless offline --host 0.0.0.0 --port 8000",
     "deploy:dev": "NODE_ENV=development npx serverless deploy",
     "deploy:prod": "NODE_ENV=production npx serverless deploy",
+    "tsc": "npx tsc",
     "format:lint": "npx eslint  **/*.ts",
     "format:prettier": "npx prettier \"**/*.+(json|yml|yaml|graphql|gql|sass|scss|less|css)\"",
     "format:write": "npm run format:lint -- --fix && npm run format:prettier -- --write",
