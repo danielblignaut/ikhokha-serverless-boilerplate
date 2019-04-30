@@ -5,7 +5,6 @@ import { devTypeCheckConfig, productionTypeCheckConfig } from './../config'
 import { APIGatewayProxyEvent, Callback, APIGatewayProxyResult } from 'aws-lambda'
 import { Context as LambdaContext } from 'aws-lambda'
 
-
 function createServer(context: CustomContext): (event: APIGatewayProxyEvent, context: LambdaContext, callback: Callback<APIGatewayProxyResult>)=> void {
 
 	if(process.env.NODE_ENV == 'development') {
