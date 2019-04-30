@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 services:
   base:
     image: lambci/lambda:build-nodejs8.10

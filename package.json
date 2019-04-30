@@ -12,7 +12,8 @@
     "deploy:prod": "NODE_ENV=production npx serverless deploy",
     "format:lint": "npx eslint  **/*.ts",
     "format:prettier": "npx prettier \"**/*.+(json|yml|yaml|graphql|gql|sass|scss|less|css)\"",
-    "format:write": "npx eslint  **/*.ts --fix && npx prettier --write \"**/*.+(json|yml|yaml|graphql|gql|sass|scss|less|css)\"",
+    "format:write": "npm run format:lint -- --fix && npm run format:prettier -- --write",
+    "validate": "npm run format:lint && npm run format:prettier -- --list-different",
     "cli:generate-schema": "npx ts-node  ./cli-tools/save-remote-schema.ts --path ./src/generated/schema.graphql --url https://ikhokha.myshopify.com/api/graphql --token d2696157b6d517907338605169b708d3 --token-key X-Shopify-Storefront-Access-Token"
   },
   "dependencies": {
@@ -59,7 +60,7 @@
     "ts-loader": "^5.3.3",
     "ts-node": "^8.1.0",
     "tsconfig-paths": "^3.8.0",
-    "typescript": "^3.2.4",
+    "typescript": "^3.4.5",
     "webpack": "^4.29.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.1"
