@@ -10,8 +10,9 @@
     "dev": "NODE_ENV=development npx serverless offline --host 0.0.0.0 --port 8000",
     "deploy:dev": "NODE_ENV=development npx serverless deploy",
     "deploy:prod": "NODE_ENV=production npx serverless deploy",
-    "lint:suggest": "npx eslint  **/*.ts",
-    "lint:fix": "npx eslint  **/*.ts --fix",
+    "format:lint": "npx eslint  **/*.ts",
+    "format:prettier": "npx prettier \"**/*.+(json|yml|yaml|graphql|gql|sass|scss|less|css)\"",
+    "format:write": "npx eslint  **/*.ts --fix && npx prettier --write \"**/*.+(json|yml|yaml|graphql|gql|sass|scss|less|css)\"",
     "cli:generate-schema": "npx ts-node  ./cli-tools/save-remote-schema.ts --path ./src/generated/schema.graphql --url https://ikhokha.myshopify.com/api/graphql --token d2696157b6d517907338605169b708d3 --token-key X-Shopify-Storefront-Access-Token"
   },
   "dependencies": {
