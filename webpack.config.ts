@@ -35,16 +35,43 @@ module.exports = {
 				]
 			},
 			{
+				test: /\.css$/,
+				exclude: /\.module\.css$/,
+				use: [
+					{loader: 'style-loader'}, 
+					{loader: 'typings-for-css-modules-loader', options: {namedExport: true}},
+				],
+			},
+			{
+				test: /\.module\.css$/,
+				use: [
+					{loader: 'style-loader'},
+					{loader: 'typings-for-css-modules-loader', options: {modules: true, camelCase: true, namedExport: true}},
+				],
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: 'babel-loader',
+			},
+			{
 				test: /\.mjs$/,
 				include: /node_modules/,
-				type: 'javascript/auto',
-			}
+				type: 'javascript/auto'
+			},
+			{
+				test: /\.(eot|svg|ttf|woff|woff2)$/,
+				use: 'file-loader',
+			},
 		],
 	},
 	plugins: [
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new CircularDependencyPlugin({ exclude: /node_modules/, failOnError: false }),
+		new webpack.WatchIgnorePlugin([
+			/css\.d\.ts$/
+		])
 	],
 	resolve: {
 		extensions: [
@@ -54,7 +81,10 @@ module.exports = {
 			'.webpack.js', 
 			'.web.js', 
 			'.mjs', 
-			'.json'
-		]
+			'.json',
+			'.jsx',
+			'.tsx',
+		],
+		modules: ['node_modules', path.join(__dirname, 'src'), 'shared'],
 	},
 }

@@ -19,7 +19,7 @@ provider:
 
 functions:
   graphql:
-    name: ${env:MAIN_FUNCTION_NAME}-${env:ENVIRONMENT}
+    name: ${env:MAIN_FUNCTION_NAME}-${opt:stage, 'dev'}
     handler: handler.appFunction
     events:
       - http:

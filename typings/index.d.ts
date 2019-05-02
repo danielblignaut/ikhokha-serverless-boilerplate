@@ -17,7 +17,8 @@ declare namespace NodeJS {
 		PROXY_API_URL: string
 		PROXY_API_TOKEN: string
 		PROXY_API_TOKEN_KEY: string
-		SERVER_URL: string
+		TEST__SERVER_URL: string
 		NODE_ENV: 'production' | 'test' | 'development'
+		WEBPACK_SERVE: boolean
 	}
 }

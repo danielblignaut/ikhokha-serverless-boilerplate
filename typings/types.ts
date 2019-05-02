@@ -12,3 +12,11 @@ export interface OperationsToKeep {
 export interface AwsServer {
 	
 }
+
+export interface ProxyLinkHeaders {
+	[key: string]: string
+}
+
+export interface ProxyLinkContext {
+	headers: ProxyLinkHeaders
+}

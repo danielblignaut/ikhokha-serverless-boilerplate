@@ -3,8 +3,8 @@ services:
   base:
     image: lambci/lambda:build-nodejs8.10
     volumes:
-      - .:/usr/src
-    working_dir: /usr/src
+      - .:/code
+    working_dir: /code
   install:
     extends:
       service: base

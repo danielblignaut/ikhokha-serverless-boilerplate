@@ -1,4 +1,5 @@
-import createLink from './create-link'
-import createExecutableSchema from './create-executable-schema'
+import createProxyLink from './create-proxy-link'
+import createRemoteExecutableSchema from './create-remote-executable-schema'
 import typeDefs from './../../generated/schema.graphql'
-export { createLink, createExecutableSchema, typeDefs }
+export { createProxyLink, createRemoteExecutableSchema, typeDefs }
+

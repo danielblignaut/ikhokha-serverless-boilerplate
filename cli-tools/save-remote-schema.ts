@@ -1,4 +1,4 @@
-import createLink from '../src/lib/proxy/create-link'
+import createLink from '../src/lib/proxy/create-proxy-link'
 import { ApolloLink } from 'apollo-link'
 import * as fs from 'fs'
 import { promisify } from 'util'
@@ -24,7 +24,8 @@ import {
 	transformSchema,
 	FilterRootFields} from 'graphql-tools'
 import { RootFilter } from 'graphql-tools/dist/transforms/FilterRootFields'
-import { OperationsToKeep } from '../typings/types'
+import { OperationsToKeep, ProxyLinkHeaders } from '../typings/types'
+import createProxyLink from '../src/lib/proxy/create-proxy-link'
 
 const removeRootQueriesAndMutations: RootFilter = (
 	operation: 'Query' | 'Mutation' | 'Subscription',
@@ -80,7 +81,13 @@ const run = async (): Promise<void> => {
 	if (typeof argv['token-key'] === 'undefined')
 		throw new Error('--token-key flag must be set')
 
-	const link: ApolloLink = createLink(argv['url'], argv['token'], argv['token-key'] )
+	let linkHeaders: ProxyLinkHeaders = {
+	
+	}
+	linkHeaders[process.env.PROXY_API_TOKEN_KEY] = process.env.PROXY_API_TOKEN
+
+	const link: ApolloLink = createProxyLink(process.env.PROXY_API_URL, linkHeaders)
+
 	const writeFile = promisify(fs.writeFile)
 
 	let schema: GraphQLSchema = await fetchSchema(link)

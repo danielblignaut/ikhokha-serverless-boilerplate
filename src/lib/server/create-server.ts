@@ -1,24 +1,24 @@
-import { createExecutableSchema, typeDefs } from './../proxy'
-import { CustomContext } from './../../../typings/types'
+import { createRemoteExecutableSchema, typeDefs, createProxyLink } from './../proxy'
+import { CustomContext, ProxyLinkHeaders } from './../../../typings/types'
 import { ApolloServer } from 'apollo-server-lambda'
-import { devTypeCheckConfig, productionTypeCheckConfig } from './../config'
+import { typeCheckConfig } from './../config'
 import { APIGatewayProxyEvent, Callback, APIGatewayProxyResult } from 'aws-lambda'
 import { Context as LambdaContext } from 'aws-lambda'
 
 function createServer(context: CustomContext): (event: APIGatewayProxyEvent, context: LambdaContext, callback: Callback<APIGatewayProxyResult>)=> void {
 
-	if(process.env.NODE_ENV == 'development') {
-		devTypeCheckConfig()
-	}
-	else if(process.env.NODE_ENV == 'production') {
-		productionTypeCheckConfig()
-	}
+	typeCheckConfig()
 
-	const schema = createExecutableSchema(
+	let linkHeaders: ProxyLinkHeaders = {
+		
+	}
+	linkHeaders[process.env.PROXY_API_TOKEN_KEY] = process.env.PROXY_API_TOKEN
+
+	const apolloLink = createProxyLink(process.env.PROXY_API_URL, linkHeaders)
+
+	const schema = createRemoteExecutableSchema(
 		typeDefs,
-		'asdasd',
-		process.env.PROXY_API_TOKEN,
-		process.env.PROXY_API_TOKEN_KEY
+		apolloLink
 	)
 
 

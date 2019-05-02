@@ -1,7 +1,10 @@
-{
+const path = require('path')
+
+module.exports = {
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "globals": {
@@ -39,5 +42,24 @@
     "semi": ["error", "never"]
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"]
+  "plugins": ["jest", "@typescript-eslint"],
+  "overrides": [
+    {
+      
+        "files": ["**/__client_tests__/**", "**/__server_tests__/**", "**/*.test.{ts,js,jsx,tsx}", ],
+        "settings": {
+          "import/resolver": {
+            "jest": {
+              "jestConfigFile": path.join(__dirname, './jest-common-config.ts'),
+            },
+          },
+        },
+      rules: {
+        "@typescript-eslint/explicit-function-return-type": ["off"],
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "@typescript-eslint/no-unused-vars": ["off"]
+      }
+    },
+    
+  ]
 }

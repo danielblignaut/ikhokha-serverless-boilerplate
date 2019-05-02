@@ -1,3 +1,3 @@
-import { devTypeCheckConfig, testTypeCheckConfig, productionTypeCheckConfig } from './type-check-config'
+import  typeCheckConfig from './type-check-config'
 
-export { devTypeCheckConfig, testTypeCheckConfig, productionTypeCheckConfig }
+export { typeCheckConfig }
