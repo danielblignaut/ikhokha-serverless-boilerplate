@@ -1,7 +1,9 @@
+
 declare module 'serverless-offline'
 declare module 'serverless-webpack'
 declare module 'custom-env' 
-
+declare module 'aws-lambda-test-utils'
+declare module 'aws-event-mocks'
 declare module '*.json' {
 	const content: any
 	export default content
@@ -20,5 +22,6 @@ declare namespace NodeJS {
 		TEST__SERVER_URL: string
 		NODE_ENV: 'production' | 'test' | 'development'
 		WEBPACK_SERVE: boolean
+		PWD: string
 	}
 }

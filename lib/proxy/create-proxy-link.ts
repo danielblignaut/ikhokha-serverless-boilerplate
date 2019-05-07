@@ -2,13 +2,12 @@ import { HttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { ApolloLink } from 'apollo-link'
 import fetch from 'node-fetch'
-import { ProxyLinkContext, ProxyLinkHeaders } from '../../../typings/types'
+import { ProxyLinkContext, ProxyLinkHeaders } from '@ikhokha/typings/types'
 import * as validUrl from 'valid-url'
-import { InvalidUriError } from '../exceptions'
 
 export default (url: string, headers: ProxyLinkHeaders): ApolloLink => {
 
-	if(!validUrl.isUri(url)) throw new InvalidUriError(`${url} is not a valid url`)
+	if(!validUrl.isUri(url)) throw new Error(`${url} is not a valid url`)
 
 	// Apollo has no fix for the below typings hack :(
 	const fetchHack: GlobalFetch['fetch'] = (fetch as unknown) as GlobalFetch['fetch']

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filter schema give a valid filter and schema 1`] = `
+"type Post
+"
+`;
+
+exports[`filter schema give no query / mutation filters 1`] = `
+"type Post
+"
+`;
+
+exports[`filter schema give no type filters 1`] = `
+"
+"
+`;

@@ -1,18 +1,16 @@
 import createProxyLink from './create-proxy-link'
-import { InvalidUriError } from '../exceptions'
 import { ApolloLink } from 'apollo-link'
 import {ApolloClient} from 'apollo-client'
 import {InMemoryCache} from 'apollo-cache-inmemory'
-import { gql } from 'apollo-server-core'
-import { ProxyLinkHeaders } from '../../../typings/types'
-import { query } from '../../../test/queries'
+import { ProxyLinkHeaders } from '@ikhokha/typings/types'
+import * as query from '@ikhokha/test/graphql-files/queries'
 
 describe('create proxy link', () => {
 
 	test('parse an invalid URL', () => {	
 		expect(() => {
 			createProxyLink('asdasdaasd.gooasdasdgle.com',{})
-		}).toThrowError(InvalidUriError)
+		}).toThrowError(Error)
 	})
 
 	test('parse a valid URL', () => {

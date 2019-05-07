@@ -1,26 +1,29 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
-
 module.exports = {
 	rootDir: path.join(__dirname, '..', '..'),
 	transform: {
+		'^.+\\.graphql$': 'jest-raw-loader',
 		'^.+\\.jsx?$': 'babel-jest',
-		'^.+\\.ts?$': 'ts-jest'
+		'^.+\\.ts?$': 'ts-jest',
+
 	},
-	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node', 'graphql', 'gql'],
 	moduleNameMapper: {
 		'\\.module\\.css$': 'identity-obj-proxy',
 		'\\.css$': require.resolve('./../style-mock.ts'),
+		'@ikhokha/(.*)$': '<rootDir>/$1',
 	},
-	moduleDirectories: ['node_modules', path.join(__dirname, '..', '..', 'src'), path.join(__dirname, '..', '..', 'shared'), path.join(__dirname, '..')],
+	moduleDirectories: ['node_modules'],
 	setupFilesAfterEnv: [require.resolve('./../setup-test.ts')],
 	collectCoverageFrom: [
 		'**/src/**/*.{ts,js,jsx,tsx}',
-		'**/cli-tools/**/*.{ts,js,jsx,tsx}',
+		'**/lib/**/*.{ts,js,jsx,tsx}',
 		'!**/src/**/*.test.{ts,js,jsx,tsx}',
 		'!**/cli-tools/**/*.test.{ts,js,jsx,tsx}',
-		'!**/src/**/index.{ts,js,jsx,tsx}',
 		'!**/cli-tools/**/index.{ts,js,jsx,tsx}',
+		'!**/lib/**/*.test.{ts,js,jsx,tsx}',
+
 	],
 	coveragePathIgnorePatterns: [
 		'/node_modules/',

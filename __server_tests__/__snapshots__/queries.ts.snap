@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Shopify Queries succesfully get first product 1`] = `
+Object {
+  "products": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzE2ODA1ODQ2Mzg1MjI=",
+          "title": "Mover Lite",
+        },
+      },
+    ],
+  },
+}
+`;

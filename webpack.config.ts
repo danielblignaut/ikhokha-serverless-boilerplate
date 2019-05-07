@@ -1,8 +1,10 @@
-import * as CircularDependencyPlugin from 'circular-dependency-plugin'
 import * as path from 'path'
-import * as slsw from 'serverless-webpack'
 import * as webpack from 'webpack'
-
+// eslint-disable-next-line
+const slsw = require('serverless-webpack')
+const srcPath = (subdir: string): string => {
+	return path.join(__dirname, subdir)
+}
 
 module.exports = {
 	mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
@@ -12,7 +14,7 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		libraryTarget: 'commonjs',
-		path: path.resolve(__dirname, '.webpack'),
+		path: path.resolve(__dirname, '.webpack')
 	},
 	module: {
 		rules: [
@@ -23,7 +25,7 @@ module.exports = {
 					{ loader: 'imports-loader', options: { graphql: true } },
 					{ loader: 'babel-loader' },
 					{ loader: 'eslint-loader'}
-				],
+				]
 			},
 			{
 				exclude: /node_modules/,
@@ -31,7 +33,7 @@ module.exports = {
 				use: [
 					{
 						loader: 'raw-loader',
-					},
+					}
 				]
 			},
 			{
@@ -39,20 +41,20 @@ module.exports = {
 				exclude: /\.module\.css$/,
 				use: [
 					{loader: 'style-loader'}, 
-					{loader: 'typings-for-css-modules-loader', options: {namedExport: true}},
-				],
+					{loader: 'typings-for-css-modules-loader', options: {namedExport: true}}
+				]
 			},
 			{
 				test: /\.module\.css$/,
 				use: [
 					{loader: 'style-loader'},
-					{loader: 'typings-for-css-modules-loader', options: {modules: true, camelCase: true, namedExport: true}},
+					{loader: 'typings-for-css-modules-loader', options: {modules: true, camelCase: true, namedExport: true}}
 				],
 			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: 'babel-loader',
+				use: 'babel-loader'
 			},
 			{
 				test: /\.mjs$/,
@@ -61,14 +63,13 @@ module.exports = {
 			},
 			{
 				test: /\.(eot|svg|ttf|woff|woff2)$/,
-				use: 'file-loader',
+				use: 'file-loader'
 			},
 		],
 	},
 	plugins: [
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
-		new CircularDependencyPlugin({ exclude: /node_modules/, failOnError: false }),
 		new webpack.WatchIgnorePlugin([
 			/css\.d\.ts$/
 		])
@@ -83,8 +84,19 @@ module.exports = {
 			'.mjs', 
 			'.json',
 			'.jsx',
-			'.tsx',
+			'.tsx'
 		],
-		modules: ['node_modules', path.join(__dirname, 'src'), 'shared'],
-	},
+		modules: [
+			'node_modules', 
+		],
+		alias: {
+			'@ikhokha/src': srcPath('src'),
+			'@ikhokha/test': srcPath('test'),
+			'@ikhokha/lib': srcPath('lib'),
+			'@ikhokha/cli-tools': srcPath('cli-tools'),
+			'@ikhokha/generated': srcPath('generated')
+		}
+	}
 }
+
+

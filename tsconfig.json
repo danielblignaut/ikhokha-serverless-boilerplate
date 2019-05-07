@@ -9,7 +9,17 @@
     "declaration": false,
     "sourceMap": true,
     "strict": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+        "@ikhokha/src/*": [ "src/*" ],
+        "@ikhokha/test/*": [ "test/*" ],
+        "@ikhokha/cli-tools/*": [ "cli-tools/*" ],
+        "@ikhokha/lib/*": [ "lib/*" ],
+        "@ikhokha/typings/*": [ "typings/*" ],
+        "@ikhokha/generated/*": [ "generated/*" ]
+    }
   },
   "exclude": ["node_modules"]
 }

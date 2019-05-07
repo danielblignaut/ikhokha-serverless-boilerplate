@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Shopify Queries create a checkout 1`] = `
+Object {
+  "checkoutCreate": Object {
+    "checkout": Object {
+      "email": "daniel@ucook.co.za",
+      "id": Any<String>,
+      "note": "this is my test note!!!",
+    },
+  },
+}
+`;
