@@ -14,12 +14,13 @@
     "dev": "NODE_ENV=development npx serverless offline --host 0.0.0.0 --port 8000",
     "deploy:dev": "npx serverless deploy --stage dev",
     "tsc": "npx tsc",
+    "ts-node": "npx ts-node -r tsconfig-paths/register",
     "format:lint": "npx eslint  '**/*.{js,ts,tsx,jsx}'",
     "format:prettier": "npx prettier \"**/*.+(json|yml|yaml|graphql|gql|sass|scss|less|css)\"",
     "format:write": "npm run format:lint -- --fix && npm run format:prettier -- --write",
     "validate": "npm run format:lint && npm run format:prettier -- --list-different && tsc",
     "precommit": "npm run format:write && npm run validate && npm run test",
-    "cli:generate-schema": "npx ts-node  ./cli-tools/run-save-remote-schema.ts --path ./src/generated/schema.graphql --url https://ikhokha.myshopify.com/api/graphql --token d2696157b6d517907338605169b708d3 --token-key X-Shopify-Storefront-Access-Token"
+    "cli:generate-schema": "npm run ts-node --  ./cli-tools/run-save-remote-schema.ts --path ./generated/schema.graphql --url https://ikhokha.myshopify.com/api/graphql --token d2696157b6d517907338605169b708d3 --token-key X-Shopify-Storefront-Access-Token"
   },
   "dependencies": {
     "apollo-link-context": "^1.0.17",
@@ -99,6 +100,12 @@
     "webpack": "^4.29.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
+    }
   },
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
   "license": "MIT"

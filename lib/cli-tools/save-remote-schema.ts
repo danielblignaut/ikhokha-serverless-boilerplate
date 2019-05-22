@@ -18,7 +18,7 @@ export default async (url: string, token: string, path: string, tokenKey: string
 
 	if(pathArr.length <= 1) throw new Error(`${path} must contain relative directory`)
 
-	let pathString = process.env.PWD
+	let pathString = process.env.PWD + ''
 	const fileName = pathArr[pathArr.length-1]
 	const fileNameArr = fileName.split('.')
 
@@ -35,8 +35,11 @@ export default async (url: string, token: string, path: string, tokenKey: string
 			pathString += '/' + val
 		}
 	})
+
 	if(!fs.existsSync(pathString)) throw new Error(`${pathString} does not exist`)
 	
+	pathString +='/'
+
 	path = pathString + fileName
 	
 	const re = /(?:\.([^.]+))?$/
@@ -51,9 +54,10 @@ export default async (url: string, token: string, path: string, tokenKey: string
 	const link: ApolloLink = createProxyLink(url, linkHeaders)
 	let schema: GraphQLSchema = await introspectSchema(link)
 	schema = filterSchema(schema, operationsToKeep, typesToKeep)
-	let schemaString: string = printSchema(schema)
-	const res = await fs.promises.writeFile(path, schemaString)
+	// appsync doesn't like """ comments, need to use #
+	let schemaString: string = printSchema(schema, { commentDescriptions: true })
 
+	const res = await fs.promises.writeFile(path, schemaString)
 	console.log('successfully saved schema!')
 }
 

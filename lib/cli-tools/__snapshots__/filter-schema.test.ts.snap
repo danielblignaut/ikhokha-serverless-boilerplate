@@ -11,6 +11,41 @@ exports[`filter schema give no query / mutation filters 1`] = `
 `;
 
 exports[`filter schema give no type filters 1`] = `
+"type Author {
+  id: Int!
+  firstName: String
+  lastName: String
+
+  \\"\\"\\"the list of Posts by this author\\"\\"\\"
+  posts: [Post]
+}
+
+\\"\\"\\"this schema allows the following mutation:\\"\\"\\"
+type Mutation {
+  deletePost(postId: Int!): Post
+  editAuthor(authorId: Int!): Author
+}
+
+type Post {
+  id: Int!
+  title: String
+  author: Author
+  votes: Int
+}
+
+\\"\\"\\"the schema allows the following query:\\"\\"\\"
+type Query {
+  getPosts: [Post!]!
+  getAuthorById(id: Int): Author!
+}
 "
+`;
+
+exports[`filter schema give one type filters 1`] = `
+"type Author {
+  id: Int!
+  firstName: String
+  lastName: String
+}
 "
 `;

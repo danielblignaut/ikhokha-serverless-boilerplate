@@ -43,7 +43,6 @@ export default (schema: GraphQLSchema, operationsToKeep: OperationsToKeep, types
 		return (
 			operation: 'Query' | 'Mutation' | 'Subscription',
 			fieldName: string): boolean => {
-			
 			return typeof operationsToKeep[operation] != 'undefined' && operationsToKeep[operation].indexOf(fieldName) > -1
 				? true
 				: false
@@ -51,7 +50,10 @@ export default (schema: GraphQLSchema, operationsToKeep: OperationsToKeep, types
 	}
 
 	const removeUnusedTypes = (type: GraphQLNamedType): boolean => {
-		return typesToKeep.indexOf(type.name) > -1 ? true : false
+		const name = type.name
+		if(typesToKeep.length == 0) return true
+
+		return typesToKeep.indexOf(name) > -1 ? true : false
 	}
 
 	return transformSchema(schema, [

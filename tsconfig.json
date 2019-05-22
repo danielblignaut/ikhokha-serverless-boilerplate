@@ -13,12 +13,12 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-        "@ikhokha/src/*": [ "src/*" ],
-        "@ikhokha/test/*": [ "test/*" ],
-        "@ikhokha/cli-tools/*": [ "cli-tools/*" ],
-        "@ikhokha/lib/*": [ "lib/*" ],
-        "@ikhokha/typings/*": [ "typings/*" ],
-        "@ikhokha/generated/*": [ "generated/*" ]
+      "@ikhokha/src/*": ["src/*"],
+      "@ikhokha/test/*": ["test/*"],
+      "@ikhokha/cli-tools/*": ["cli-tools/*"],
+      "@ikhokha/lib/*": ["lib/*"],
+      "@ikhokha/typings/*": ["typings/*"],
+      "@ikhokha/generated/*": ["generated/*"]
     }
   },
   "exclude": ["node_modules"]

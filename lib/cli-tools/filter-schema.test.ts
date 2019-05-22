@@ -38,6 +38,16 @@ describe('filter schema', () => {
 		expect(printSchema(filteredSchema)).toMatchSnapshot()
 	})
 
+	test('give one type filters', () => {
+		typesToKeep = [
+			'Author',
+			'Int',
+			'String'
+		]
+		let filteredSchema = filterSchema(schema,operationsToKeep, typesToKeep)
+		expect(printSchema(filteredSchema)).toMatchSnapshot()
+	})
+
 	test('give invalid query filter', () => {
 		operationsToKeep = {
 			Query: ['fetchDog'],
